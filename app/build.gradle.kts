@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pexeltestproject"
-    compileSdk = 34
+    namespace = Android.versionName
+    compileSdk = Android.compileSdk
 
     defaultConfig {
-        applicationId = "com.example.pexeltestproject"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Android.appId
+        minSdk = Android.minSdk
+        targetSdk = Android.targetSdk
+        versionCode = Android.versionCode
+        versionName = Android.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,11 +37,11 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.appCompat)
+    implementation(Google.material)
+    implementation(AndroidX.constraintlayout)
+    testImplementation(JUnit.jUnit)
+    androidTestImplementation(AndroidXTest.jUnitInstrumentTest)
+    androidTestImplementation(AndroidXTest.espresso)
 }
