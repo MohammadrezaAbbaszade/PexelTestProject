@@ -69,7 +69,7 @@ object AndroidX {
     const val fragment = "androidx.fragment:fragment-ktx:$fragmentVersion"
 
 
-    private const val navigation_fragmentVersion = "2.4.2"
+    private const val navigation_fragmentVersion = "2.5.0"
     const val navigation_fragment =
         "androidx.navigation:navigation-fragment-ktx:$navigation_fragmentVersion"
     const val navigation_ui = "androidx.navigation:navigation-ui-ktx:$navigation_fragmentVersion"

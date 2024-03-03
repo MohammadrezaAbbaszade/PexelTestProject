@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = Android.versionName
+    namespace = "com.example.pexeltestproject"
     compileSdk = Android.compileSdk
 
     defaultConfig {
@@ -44,4 +44,7 @@ dependencies {
     testImplementation(JUnit.jUnit)
     androidTestImplementation(AndroidXTest.jUnitInstrumentTest)
     androidTestImplementation(AndroidXTest.espresso)
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.1.0")
+    androidTestImplementation ("androidx.test:runner:1.1.0")
+    androidTestImplementation ("androidx.test:rules:1.1.0")
 }
