@@ -74,7 +74,7 @@ class ImageListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        roomListViewModel.getImageList(EndPoints.page)
+        roomListViewModel.getImageList(1)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

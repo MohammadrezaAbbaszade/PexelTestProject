@@ -39,41 +39,35 @@ class ImageServiceImpl @Inject constructor(private val apiService: ApiService) :
                         }
                     }
 
-                } catch (e: Exception) {
+                }catch (e:Exception){
                     e.printStackTrace()
-                }
-            }
-
-        }.catch {
-            when (it) {
-                is SSLHandshakeException -> {
-                    withContext(Dispatchers.Main.immediate) {
-                        emit(
-                            DataState.Response(
-                                uiComponent = UiComponent.Dialog(
-
-                                    title = "NetworkError",
-                                    description = it.message ?: "NetworkErrorr"
-                                )
-                            )
-                        )
-                    }
-                }
-
-                else -> {
                     withContext(Dispatchers.Main.immediate) {
                         emit(
                             DataState.Response(
                                 uiComponent = UiComponent.Dialog(
 
                                     title = "Error",
-                                    description = it.message ?: "Unknown Error"
+                                    description = e.message ?: "UnknownError"
+                                )
+                            )
+                        )
+                    }
+                } catch (e: SSLHandshakeException) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main.immediate) {
+                        emit(
+                            DataState.Response(
+                                uiComponent = UiComponent.Dialog(
+
+                                    title = "NetworkError",
+                                    description = e.message ?: "NetworkErrorr"
                                 )
                             )
                         )
                     }
                 }
             }
+
         }
 
 }
