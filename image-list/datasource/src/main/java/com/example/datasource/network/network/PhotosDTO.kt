@@ -1,4 +1,4 @@
-package com.example.datasource
+package com.example.datasource.network.network
 
 import com.example.domain.Photo
 import com.example.domain.PhotoDetail

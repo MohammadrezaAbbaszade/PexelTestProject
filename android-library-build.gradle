@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
 
 android {
     namespace = Android.appId
@@ -36,6 +38,14 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     testImplementation("junit:junit:4.13.2")
+    implementation(Hilt.android)
+    kapt(Hilt.compiler)
+    implementation AndroidX.fragment
+    implementation Glide.glide
+    implementation(Network.gson)
+    implementation(Network.retrofit)
+    implementation(Network.loggingInterceptor)
+    implementation(Network.gsonConverter)
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }

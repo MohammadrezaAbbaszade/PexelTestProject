@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/image-list/ui-imageDetail" />
             <option value="$PROJECT_DIR$/image-list/ui-imageList" />
             <option value="$PROJECT_DIR$/image-list/usecase" />
+            <option value="$PROJECT_DIR$/navigator" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

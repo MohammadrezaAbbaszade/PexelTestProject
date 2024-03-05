@@ -5,14 +5,18 @@ plugins {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
     "implementation"(project(":image-list:domain"))
-
-    "implementation"(Ktor.core)
+    "implementation"(project(":core"))
+    "implementation"(project(":constants"))
+    "implementation"(Network.gson)
+    "implementation"(Network.retrofit)
+    "implementation"(Network.gsonConverter)
+    "implementation"(Kotlinx.coroutinesCore)
     "implementation"(Ktor.clientSerialization)
-    "implementation"(Ktor.android)
+    "implementation"(Hilt.core)
 }
