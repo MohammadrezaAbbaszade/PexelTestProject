@@ -10,6 +10,7 @@ buildscript {
     dependencies {
         classpath(Build.hiltAndroid)
         classpath(AndroidX.navigation_safe_arg)
-        classpath ("io.realm:realm-gradle-plugin:10.11.0")
+        classpath(Build.androidBuildTools)
+        classpath ("io.realm:realm-gradle-plugin:10.15.1")
     }
 }

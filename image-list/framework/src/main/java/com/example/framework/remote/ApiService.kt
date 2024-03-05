@@ -1,4 +1,4 @@
-package com.example.datasource.network.network
+package com.example.framework.remote
 
 import retrofit2.Response
 import retrofit2.http.GET

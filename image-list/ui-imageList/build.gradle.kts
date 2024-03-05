@@ -5,6 +5,7 @@ apply {
 dependencies{
     "implementation"(project(":image-list:domain"))
     "implementation"(project(":image-list:datasource"))
+    "implementation"(project(":image-list:framework"))
     "implementation"(project(":image-list:usecase"))
     "implementation"(project(":constants"))
     "implementation"(project(":navigator"))

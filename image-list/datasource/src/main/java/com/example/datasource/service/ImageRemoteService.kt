@@ -1,9 +1,9 @@
-package com.example.datasource.network.network
+package com.example.datasource.service
 
 import com.example.core.DataState
 import com.example.domain.Photo
 import kotlinx.coroutines.flow.Flow
 
-interface ImageService {
+interface ImageRemoteService {
     suspend fun getImageList(pageNumber:Int): Flow<DataState<Photo>>
 }

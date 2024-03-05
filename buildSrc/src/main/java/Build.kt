@@ -10,7 +10,7 @@ object Build {
     const val betterLink = "me.saket:better-link-movement-method:$betterLinkVersion"
 
     const val androidLibrary = "com.android.library:7.1.3"
-
+    const val sqlDelightGradlePlugin = "com.squareup.sqldelight:gradle-plugin:${SqlDelight.version}"
     const val androidApplication = "com.android.application:7.1.3"
 
 }

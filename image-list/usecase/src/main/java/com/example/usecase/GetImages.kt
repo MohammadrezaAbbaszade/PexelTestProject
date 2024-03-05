@@ -3,42 +3,15 @@ package com.example.usecase
 import com.example.constants.EndPoints
 import com.example.core.DataState
 import com.example.core.ProgressBarState
-import com.example.core.UiComponent
-import com.example.datasource.network.network.ImageService
-import com.example.domain.Photo
+import com.example.datasource.repository.ImageRepository
 import com.example.domain.PhotoDetail
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 
-class GetImages(private val imageService: ImageService) {
+class GetImages(private val imageRepository: ImageRepository) {
 
-    fun execute(pageNumber: Int): Flow<DataState<List<PhotoDetail>>> = flow {
-
-        emit(DataState.Loading(progressBarState = ProgressBarState.Loading))
-
-         imageService.getImageList(pageNumber).collect{photoData->
-            when (photoData) {
-                is DataState.Data -> {
-                    val photoList = mutableListOf<PhotoDetail>()
-                    photoData.data?.let {
-                        EndPoints.page = it.page
-                        it.photos.map {
-                            photoList.add(it)
-                        }
-                    }
-                    emit(DataState.Data(photoList))
-                }
-
-                is DataState.Response -> {
-                    emit(DataState.Response(photoData.uiComponent))
-                }
-
-                else -> {}
-            }
-        }
-
-
+    suspend fun execute(pageNumber: Int): Flow<DataState<List<PhotoDetail>>> {
+        return imageRepository.getImageList(pageNumber)
     }
 }

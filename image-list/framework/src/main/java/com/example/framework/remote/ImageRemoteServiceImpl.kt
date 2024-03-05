@@ -1,21 +1,21 @@
-package com.example.datasource.network.network
+package com.example.framework.remote
 
 import com.example.constants.EndPoints
 import com.example.core.DataState
 import com.example.core.UiComponent
+import com.example.datasource.service.ImageRemoteService
 import com.example.domain.Photo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.net.ssl.SSLHandshakeException
 
-class ImageServiceImpl @Inject constructor(private val apiService: ApiService) : ImageService {
+class ImageRemoteServiceImpl @Inject constructor(private val apiService: ApiService) :
+    ImageRemoteService {
 
-    override suspend fun getImageList(pageNumber: Int): Flow<DataState<Photo>> =
-        flow<DataState<Photo>> {
+    override suspend fun getImageList(pageNumber: Int): Flow<DataState<Photo>> = flow<DataState<Photo>> {
             withContext(Dispatchers.IO) {
                 try {
 

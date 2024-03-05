@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("realm-android")
 }
 
 android {
@@ -40,6 +41,7 @@ android {
 dependencies {
     implementation (project(":constants"))
     implementation (project(":image-list:datasource"))
+    implementation (project(":image-list:framework"))
     implementation (project(":navigator"))
     implementation (project(":image-list:domain"))
     implementation (project(":image-list:usecase"))

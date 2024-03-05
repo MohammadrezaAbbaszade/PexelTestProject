@@ -1,19 +1,24 @@
 package com.example.pexeltestproject.di
 
+import android.content.Context
 import com.example.constants.EndPoints
-import com.example.datasource.network.network.ApiService
+import com.example.framework.datastorage.PhotoDataStorage
+import com.example.framework.datastorage.PhotoDataStorageImpl
+import com.example.framework.remote.ApiService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -56,5 +61,24 @@ class AppModule {
     @Singleton
     fun provideRetrofitApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRealm(@ApplicationContext context: Context): Realm {
+        Realm.init(context)
+        val config: RealmConfiguration = RealmConfiguration.Builder()
+            .deleteRealmIfMigrationNeeded()
+            .build()
+        Realm.setDefaultConfiguration(config)
+        Realm.compactRealm(config)
+        return Realm.getDefaultInstance()
+    }
+
+
+    @Singleton
+    @Provides
+    fun providePhotoDataStorage(realm: Realm): PhotoDataStorage {
+        return PhotoDataStorageImpl(realm)
     }
 }

@@ -1,4 +1,4 @@
-package com.example.datasource.network.network
+package com.example.framework.remote
 
 import com.example.domain.Photo
 import com.example.domain.PhotoDetail
