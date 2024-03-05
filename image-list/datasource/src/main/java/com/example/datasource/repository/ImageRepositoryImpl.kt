@@ -25,17 +25,20 @@ class ImageRepositoryImpl @Inject constructor(
                     val photoList = mutableListOf<PhotoDetail>()
                     photoData.data?.let {
                         EndPoints.page = it.page
-                        it.photos.map {
-                            photoList.add(it)
+                        it.photos.map { photoDetail ->
+                            photoDetail.page = it.page
+                            photoList.add(photoDetail)
                         }
+                        imageLocalService.insertPhotoListToLocal(photoList)
                     }
-                    imageLocalService.insertPhotoListToLocal(photoList)
+
                     emit(DataState.Data(photoList))
                 }
 
                 is DataState.Response -> {
                     emit(DataState.Response(photoData.uiComponent))
                     val photoLocalList = imageLocalService.getPhotosFromLocal()
+                    EndPoints.page = photoLocalList.last().page ?: 0
                     emit(DataState.Data(photoLocalList))
                 }
 

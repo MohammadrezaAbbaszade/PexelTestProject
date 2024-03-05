@@ -66,7 +66,7 @@ class ImageListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        photoListViewModel.getImageList(1)
+        photoListViewModel.getImageList(EndPoints.page + 1)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,8 +75,10 @@ class ImageListFragment : Fragment() {
         photoListViewModel.photoItemsObserver.observe(viewLifecycleOwner) { dataState ->
             when (dataState) {
                 is DataState.Data -> {
-                    imageListAdapter.addPhotoItems(dataState.data!!)
-                    progressBar.visibility = View.GONE
+                    if (EndPoints.isNewDataAvailable || (!EndPoints.isNewDataAvailable && imageListAdapter.itemCount == 0)) {
+                        imageListAdapter.addPhotoItems(dataState.data!!)
+                        progressBar.visibility = View.GONE
+                    }
                 }
 
                 is DataState.Response -> {

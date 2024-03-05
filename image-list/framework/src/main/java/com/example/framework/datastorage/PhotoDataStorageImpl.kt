@@ -9,9 +9,10 @@ class PhotoDataStorageImpl @Inject constructor(val realm: Realm) : PhotoDataStor
     override suspend fun insertPhotoListToDB(photos: List<RealmPhotoObject>) {
         try {
             realm.beginTransaction()
-            photos.map {inputPhoto->
+            photos.map { inputPhoto ->
                 var photo: RealmPhotoObject? =
-                    realm.where(RealmPhotoObject::class.java).equalTo("id", inputPhoto.id).findFirst()
+                    realm.where(RealmPhotoObject::class.java).equalTo("id", inputPhoto.id)
+                        .findFirst()
 
                 if (photo == null) {
                     photo = realm.createObject(RealmPhotoObject::class.java, inputPhoto.id)
@@ -28,6 +29,7 @@ class PhotoDataStorageImpl @Inject constructor(val realm: Realm) : PhotoDataStor
                     photo.height = inputPhoto.height
                     photo.url = inputPhoto.url
                     photo.liked = inputPhoto.liked
+                    photo.lastPage = inputPhoto.lastPage
                     photo.src = realm.copyToRealm(inputPhoto.src!!)
                 }
             }

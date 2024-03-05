@@ -15,7 +15,8 @@ import javax.net.ssl.SSLHandshakeException
 class ImageRemoteServiceImpl @Inject constructor(private val apiService: ApiService) :
     ImageRemoteService {
 
-    override suspend fun getImageList(pageNumber: Int): Flow<DataState<Photo>> = flow<DataState<Photo>> {
+    override suspend fun getImageList(pageNumber: Int): Flow<DataState<Photo>> =
+        flow<DataState<Photo>> {
             withContext(Dispatchers.IO) {
                 try {
 
@@ -24,6 +25,7 @@ class ImageRemoteServiceImpl @Inject constructor(private val apiService: ApiServ
                     withContext(Dispatchers.Main.immediate) {
                         if (response.isSuccessful) {
                             if (response.body() != null) {
+                                EndPoints.isNewDataAvailable = true
                                 emit(DataState.Data(response.body()?.toPhoto()))
                             }
                         } else {
@@ -39,8 +41,9 @@ class ImageRemoteServiceImpl @Inject constructor(private val apiService: ApiServ
                         }
                     }
 
-                }catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
+                    EndPoints.isNewDataAvailable = false
                     withContext(Dispatchers.Main.immediate) {
                         emit(
                             DataState.Response(
@@ -55,6 +58,7 @@ class ImageRemoteServiceImpl @Inject constructor(private val apiService: ApiServ
                 } catch (e: SSLHandshakeException) {
                     e.printStackTrace()
                     withContext(Dispatchers.Main.immediate) {
+                        EndPoints.isNewDataAvailable = false
                         emit(
                             DataState.Response(
                                 uiComponent = UiComponent.Dialog(

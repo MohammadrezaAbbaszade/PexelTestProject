@@ -10,6 +10,7 @@ open class RealmPhotoObject(
     var id: Int? = null,
     var alt: String? = null,
     var avg_color: String? = null,
+    var lastPage: Int? = null,
     var height: Int? = null,
     var liked: Boolean? = null,
     var photographer: String? = null,
@@ -33,6 +34,7 @@ fun RealmPhotoObject.photoDetailToRealm(photoDetail: PhotoDetail): RealmPhotoObj
         photographer_id = photoDetail.photographer_id,
         url = photoDetail.url,
         liked = photoDetail.liked,
+        lastPage = photoDetail.page,
         src = RealmSrcObject().srcObjectToRealmSrcObject(photoDetail.src!!)
     )
 }
@@ -49,6 +51,7 @@ fun RealmPhotoObject.realmToPhotoDetailObject(realmPhotoObject: RealmPhotoObject
         photographer_id = realmPhotoObject.photographer_id,
         url = realmPhotoObject.url,
         liked = realmPhotoObject.liked,
+        page = realmPhotoObject.lastPage,
         src = RealmSrcObject().realmSrcObjectToSrc(realmPhotoObject.src!!)
     )
 }

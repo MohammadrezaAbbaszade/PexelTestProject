@@ -7,6 +7,7 @@ data class PhotoDetail(
     val avg_color: String?,
     val height: Int?,
     val id: Int?,
+    var page: Int? = 0,
     val liked: Boolean?,
     val photographer: String,
     val photographer_id: Int?,
@@ -14,5 +15,5 @@ data class PhotoDetail(
     val src: Src?,
     val url: String?,
     val width: Int?
-): Serializable
+) : Serializable
 
