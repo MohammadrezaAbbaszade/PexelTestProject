@@ -36,6 +36,9 @@ class ImageListAdapter : RecyclerView.Adapter<ImageListAdapter.MovieListViewHold
     fun addPhotoItems(movieItems: List<PhotoDetail>) {
         val firstIndex = photoListItem.size
         photoListItem.addAll(movieItems)
-      notifyDataSetChanged()
+        notifyItemRangeInserted(
+            firstIndex,
+            photoListItem.size - firstIndex
+        )
     }
 }

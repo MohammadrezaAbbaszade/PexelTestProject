@@ -5,16 +5,11 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.widget.AbsListView.OnScrollListener
-import android.widget.Adapter
 import android.widget.FrameLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.constants.EndPoints
@@ -24,15 +19,12 @@ import com.example.navigator.DestinationFragment
 import com.example.navigator.NavigationHelper
 import com.example.ui_imagelist.viewmodel.viewmodel.ImageListViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import java.util.Calendar
-import kotlin.math.abs
 
 
 @AndroidEntryPoint
 class ImageListFragment : Fragment() {
 
-    val roomListViewModel: ImageListViewModel by viewModels()
+    val photoListViewModel: ImageListViewModel by viewModels()
     lateinit var rootView: FrameLayout
     lateinit var progressBar: ProgressBar
     lateinit var imageRecyclerView: RecyclerView
@@ -74,13 +66,13 @@ class ImageListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        roomListViewModel.getImageList(1)
+        photoListViewModel.getImageList(1)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        roomListViewModel.photoItemsObserver.observe(viewLifecycleOwner) { dataState ->
+        photoListViewModel.photoItemsObserver.observe(viewLifecycleOwner) { dataState ->
             when (dataState) {
                 is DataState.Data -> {
                     imageListAdapter.addPhotoItems(dataState.data!!)
@@ -122,7 +114,7 @@ class ImageListFragment : Fragment() {
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
                 if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == imageListAdapter.itemCount - 1) {
                     progressBar.visibility = View.VISIBLE
-                    roomListViewModel.getImageList(EndPoints.page + 1)
+                    photoListViewModel.getImageList(EndPoints.page + 1)
                 }
             }
         })
