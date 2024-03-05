@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <ImageView
+        android:id="@+id/photo_image"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+    <TextView
+        android:id="@+id/photographer_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Photographer:"
+        app:layout_constraintTop_toBottomOf="@id/photo_image"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/photographer_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black"
+        android:text="Alex higgings"
+        app:layout_constraintTop_toTopOf="@id/photographer_title"
+        app:layout_constraintStart_toEndOf="@id/photographer_title"
+        app:layout_constraintBottom_toBottomOf="@id/photographer_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/height_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Height:"
+        app:layout_constraintTop_toBottomOf="@id/photographer_title"
+        app:layout_constraintStart_toStartOf="@id/photographer_title"/>
+    <TextView
+        android:id="@+id/height_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black"
+        android:text="300px"
+        app:layout_constraintTop_toTopOf="@id/height_title"
+        app:layout_constraintStart_toEndOf="@id/height_title"
+        app:layout_constraintBottom_toBottomOf="@id/height_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/width_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Width:"
+        app:layout_constraintTop_toBottomOf="@id/height_title"
+        app:layout_constraintStart_toStartOf="@id/height_title"/>
+    <TextView
+        android:id="@+id/width_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black"
+        android:text="300px"
+        app:layout_constraintTop_toTopOf="@id/width_title"
+        app:layout_constraintStart_toEndOf="@id/width_title"
+        app:layout_constraintBottom_toBottomOf="@id/width_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/liked_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Liked:"
+        app:layout_constraintTop_toBottomOf="@id/width_title"
+        app:layout_constraintStart_toStartOf="@id/width_title"/>
+    <TextView
+        android:id="@+id/liked_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black"
+        android:text="true"
+        app:layout_constraintTop_toTopOf="@id/liked_title"
+        app:layout_constraintStart_toEndOf="@id/liked_title"
+        app:layout_constraintBottom_toBottomOf="@id/liked_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/alt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="Alt:"
+        app:layout_constraintTop_toBottomOf="@id/liked_title"
+        app:layout_constraintStart_toStartOf="@id/liked_title"/>
+    <TextView
+        android:id="@+id/alt_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black"
+        android:text="description "
+        app:layout_constraintTop_toTopOf="@id/alt_title"
+        app:layout_constraintStart_toEndOf="@id/alt_title"
+        app:layout_constraintBottom_toBottomOf="@id/alt_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

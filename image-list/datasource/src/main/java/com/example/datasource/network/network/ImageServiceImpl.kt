@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.net.ssl.SSLHandshakeException
 
 class ImageServiceImpl @Inject constructor(private val apiService: ApiService) : ImageService {
 
@@ -16,7 +17,8 @@ class ImageServiceImpl @Inject constructor(private val apiService: ApiService) :
         withContext(Dispatchers.IO) {
             try {
 
-                val response = apiService.getImages(apiKey = EndPoints.API_KEY, pageNumber = pageNumber)
+                val response =
+                    apiService.getImages(apiKey = EndPoints.API_KEY, pageNumber = pageNumber)
                 withContext(Dispatchers.Main.immediate) {
                     if (response.isSuccessful) {
                         if (response.body() != null) {
@@ -37,17 +39,29 @@ class ImageServiceImpl @Inject constructor(private val apiService: ApiService) :
 
             } catch (e: Exception) {
                 e.printStackTrace()
-//                withContext(Dispatchers.Main.immediate) {
-//                    emit(
-//                        DataState.Response(
-//                            uiComponent = UiComponent.Dialog(
-//
-//                                title = "Error",
-//                                description = e.message ?: "Unknown Error"
-//                            )
-//                        )
-//                    )
-//                }
+                withContext(Dispatchers.Main.immediate) {
+                    emit(
+                        DataState.Response(
+                            uiComponent = UiComponent.Dialog(
+
+                                title = "Error",
+                                description = e.message ?: "Unknown Error"
+                            )
+                        )
+                    )
+                }
+            } catch (e: SSLHandshakeException) {
+                withContext(Dispatchers.Main.immediate) {
+                    emit(
+                        DataState.Response(
+                            uiComponent = UiComponent.Dialog(
+
+                                title = "NetworkError",
+                                description = e.message ?: "NetworkErrorr"
+                            )
+                        )
+                    )
+                }
             }
         }
 

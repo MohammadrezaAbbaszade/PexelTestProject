@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.CheckBox
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
@@ -22,7 +23,6 @@ abstract class BaseContactCell(
 ) : ConstraintLayout(context) {
 
     lateinit var avatarImageView: ImageView
-    lateinit var imageViewCardView: CardView
     lateinit var roomTitleWithIcons: ConstraintLayout
     lateinit var roomTitle: TextView
     lateinit var dividerLine: View
@@ -42,15 +42,9 @@ abstract class BaseContactCell(
         avatarImageView = ImageView(context).apply {
             this.id = View.generateViewId()
             this.elevation = 5f
+            this.scaleType = ImageView.ScaleType.FIT_XY
+        }
 
-        }
-        imageViewCardView = CardView(context).apply {
-            this.id = View.generateViewId()
-            this.radius = 30f
-            this.setBackgroundColor(Color.TRANSPARENT)
-            this.cardElevation = 16f
-        }
-        imageViewCardView.addView(avatarImageView)
         roomTitleWithIcons = ConstraintLayout(context).apply {
             this.id = View.generateViewId()
             val roomTitleWithIconsLayoutParams =
@@ -75,13 +69,13 @@ abstract class BaseContactCell(
         }
 
 
-        addViewToConstraintLayout(this, imageViewCardView)
+        addViewToConstraintLayout(this, avatarImageView)
         addViewToConstraintLayout(this, roomTitleWithIcons)
         addViewToConstraintLayout(roomTitleWithIcons, roomTitle)
         addViewToConstraintLayout(this, dividerLine)
 
         addConstraintSet(
-            imageViewCardView.id,
+            avatarImageView.id,
             100.dp(),
             100.dp(),
             topToTop = this.id,

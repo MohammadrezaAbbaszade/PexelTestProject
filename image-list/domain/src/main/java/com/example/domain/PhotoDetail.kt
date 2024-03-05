@@ -1,5 +1,7 @@
 package com.example.domain
 
+import java.io.Serializable
+
 data class PhotoDetail(
     val alt: String?,
     val avg_color: String?,
@@ -12,5 +14,5 @@ data class PhotoDetail(
     val src: Src?,
     val url: String?,
     val width: Int?
-)
+): Serializable
 

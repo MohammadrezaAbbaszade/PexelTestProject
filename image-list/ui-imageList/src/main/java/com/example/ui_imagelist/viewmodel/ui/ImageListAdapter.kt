@@ -12,6 +12,7 @@ import com.example.ui_imagelist.viewmodel.ui.cell.PhotoCell
 class ImageListAdapter : RecyclerView.Adapter<ImageListAdapter.MovieListViewHolder>() {
 
     private var photoListItem = mutableListOf<PhotoDetail>()
+    var onItemClicked: ((photoDetail:PhotoDetail) -> Unit)? = null
 
     class MovieListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -24,9 +25,12 @@ class ImageListAdapter : RecyclerView.Adapter<ImageListAdapter.MovieListViewHold
     }
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        val movieItemCell = holder.itemView as PhotoCell
+        val photoItemCell = holder.itemView as PhotoCell
         val currentItem = photoListItem[position]
-        movieItemCell.setData(currentItem)
+        photoItemCell.setOnClickListener {
+            onItemClicked?.invoke(currentItem)
+        }
+        photoItemCell.setData(currentItem)
     }
 
     fun addPhotoItems(movieItems: List<PhotoDetail>) {

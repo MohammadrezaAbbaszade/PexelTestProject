@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import com.example.navigator.DestinationFragment
 import com.example.navigator.NavigationModel
+import com.example.ui_imagedetail.ui.ImageDetailFragment
 import com.example.ui_imagelist.viewmodel.ui.ImageListFragment
 import java.io.Serializable
 
@@ -73,7 +74,7 @@ object Navigator {
             }
 
             DestinationFragment.IMAGE_DETAIL_FRAGMENT->{
-                ImageListFragment()
+                ImageDetailFragment()
             }
         }
     }

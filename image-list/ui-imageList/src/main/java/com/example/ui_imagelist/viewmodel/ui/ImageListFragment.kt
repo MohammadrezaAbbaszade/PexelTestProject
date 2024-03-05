@@ -8,14 +8,19 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import android.widget.FrameLayout
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.DataState
+import com.example.core.UiComponent
+import com.example.navigator.DestinationFragment
+import com.example.navigator.NavigationHelper
 import com.example.ui_imagelist.viewmodel.viewmodel.ImageListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.abs
 
 
 @AndroidEntryPoint
@@ -73,6 +78,7 @@ class ImageListFragment : Fragment() {
 
                 is DataState.Response -> {
                     progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(),(dataState.uiComponent as UiComponent.Dialog).description,Toast.LENGTH_SHORT).show()
                 }
 
                 is DataState.Loading -> {
@@ -83,6 +89,17 @@ class ImageListFragment : Fragment() {
             }
         }
 
+        imageListAdapter.onItemClicked = {photoDetail ->
+            val args = HashMap<String, Any>()
+            args[NavigationHelper.PHOTO_DETAIL_OBJECT] = photoDetail
+            NavigationHelper.navigateToDestination(
+                DestinationFragment.IMAGE_DETAIL_FRAGMENT,
+                replace = false,
+                addToBackStack = true,
+                arg = args
+            )
+
+        }
         roomListViewModel.getImageList(1)
     }
 }

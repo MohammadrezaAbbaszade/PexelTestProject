@@ -29,7 +29,7 @@ class GetImages(private val imageService: ImageService) {
             }
 
             is DataState.Response -> {
-
+                emit(DataState.Response(photoData.uiComponent))
             }
 
             else -> {}
