@@ -1,5 +1,6 @@
 package com.example.usecase
 
+import com.example.constants.EndPoints
 import com.example.core.DataState
 import com.example.core.ProgressBarState
 import com.example.core.UiComponent
@@ -21,6 +22,7 @@ class GetImages(private val imageService: ImageService) {
             is DataState.Data -> {
                 val photoList = mutableListOf<PhotoDetail>()
                 photoData.data?.let {
+                    EndPoints.page = it.page
                     it.photos.map {
                         photoList.add(it)
                     }

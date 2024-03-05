@@ -11,6 +11,7 @@ java {
 dependencies{
     "implementation"(project(":image-list:domain"))
     "implementation"(project(":image-list:datasource"))
+    "implementation"(project(":constants"))
     "implementation"(project(":core"))
     "implementation"(Kotlinx.coroutinesCore)
 }

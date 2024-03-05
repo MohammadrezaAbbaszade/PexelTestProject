@@ -5,6 +5,9 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.AbsListView.OnScrollListener
 import android.widget.Adapter
 import android.widget.FrameLayout
 import android.widget.ProgressBar
@@ -14,12 +17,15 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.constants.EndPoints
 import com.example.core.DataState
 import com.example.core.UiComponent
 import com.example.navigator.DestinationFragment
 import com.example.navigator.NavigationHelper
 import com.example.ui_imagelist.viewmodel.viewmodel.ImageListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import java.util.Calendar
 import kotlin.math.abs
 
 
@@ -66,6 +72,11 @@ class ImageListFragment : Fragment() {
         return rootView
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        roomListViewModel.getImageList(EndPoints.page)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -78,7 +89,11 @@ class ImageListFragment : Fragment() {
 
                 is DataState.Response -> {
                     progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(),(dataState.uiComponent as UiComponent.Dialog).description,Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        (dataState.uiComponent as UiComponent.Dialog).description,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
                 is DataState.Loading -> {
@@ -89,7 +104,7 @@ class ImageListFragment : Fragment() {
             }
         }
 
-        imageListAdapter.onItemClicked = {photoDetail ->
+        imageListAdapter.onItemClicked = { photoDetail ->
             val args = HashMap<String, Any>()
             args[NavigationHelper.PHOTO_DETAIL_OBJECT] = photoDetail
             NavigationHelper.navigateToDestination(
@@ -100,6 +115,17 @@ class ImageListFragment : Fragment() {
             )
 
         }
-        roomListViewModel.getImageList(1)
+
+        imageRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+                if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == imageListAdapter.itemCount - 1) {
+                    progressBar.visibility = View.VISIBLE
+                    roomListViewModel.getImageList(EndPoints.page + 1)
+                }
+            }
+        })
+
     }
 }
